@@ -3,6 +3,12 @@ module simple-chat
 go 1.25.5
 
 require (
+	github.com/pipewave-dev/go-pkg v0.0.2
+	github.com/samber/lo v1.53.0
+	github.com/vmihailenco/msgpack/v5 v5.4.1
+)
+
+require (
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
@@ -33,10 +39,7 @@ require (
 	github.com/matoous/go-nanoid/v2 v2.1.0 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
-	github.com/pipewave-dev/go-pkg v0.0.0-20260303174118-3b30ad4fed66 // indirect
-	github.com/samber/lo v1.53.0 // indirect
 	github.com/valkey-io/valkey-go v1.0.72 // indirect
-	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/yunerou/aerro v0.0.7 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
