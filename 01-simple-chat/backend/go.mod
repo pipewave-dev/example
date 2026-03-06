@@ -3,7 +3,7 @@ module simple-chat
 go 1.25.5
 
 require (
-	github.com/pipewave-dev/go-pkg v0.0.2
+	github.com/pipewave-dev/go-pkg v0.0.3
 	github.com/samber/lo v1.53.0
 	github.com/vmihailenco/msgpack/v5 v5.4.1
 )
@@ -33,7 +33,7 @@ require (
 	github.com/knadh/koanf/parsers/yaml v1.1.0 // indirect
 	github.com/knadh/koanf/providers/env v1.1.0 // indirect
 	github.com/knadh/koanf/providers/rawbytes v1.0.0 // indirect
-	github.com/knadh/koanf/v2 v2.3.2 // indirect
+	github.com/knadh/koanf/v2 v2.3.3 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mailru/easygo v0.0.0-20190618140210-3c14a0dc985f // indirect
 	github.com/matoous/go-nanoid/v2 v2.1.0 // indirect
@@ -62,6 +62,6 @@ require (
 	golang.org/x/time v0.14.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20260226221140-a57be14db171 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260226221140-a57be14db171 // indirect
-	google.golang.org/grpc v1.79.1 // indirect
+	google.golang.org/grpc v1.79.2 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )

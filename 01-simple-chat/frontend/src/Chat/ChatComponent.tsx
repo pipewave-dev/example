@@ -19,6 +19,7 @@ interface Message {
     text: string
     timestamp: number
     isMe: boolean
+    status: 'pending' | 'sent' | 'failed'
 }
 
 // --- Main component using websocket ---
@@ -37,7 +38,8 @@ export function Chat({ toUserId }: { toUserId: string }) {
                 from: payload.from_user_id,
                 text: payload.content,
                 timestamp: payload.timestamp,
-                isMe: false
+                isMe: false,
+                status: 'sent',
             }])
             setTypingUser(null) // Stop typing indicator when message arrives
             setToUserOffline(false)
@@ -52,8 +54,9 @@ export function Chat({ toUserId }: { toUserId: string }) {
                 setTypingUser(null)
             }, 3000)
         },
-        [MSG_TYPE_CHAT_ACK]: async () => {
+        [MSG_TYPE_CHAT_ACK]: async (_: Uint8Array, id: string) => {
             setToUserOffline(false)
+            setMessages(prev => prev.map(msg => msg.id === id ? { ...msg, status: 'sent' } : msg))
         },
         [MSG_TYPE_ECHO_RESPONSE]: async (data: Uint8Array, id: string) => {
             const text = new TextDecoder().decode(data)
@@ -62,11 +65,13 @@ export function Chat({ toUserId }: { toUserId: string }) {
                 from: 'System',
                 text,
                 timestamp: Date.now() / 1000,
-                isMe: false
+                isMe: false,
+                status: 'sent',
             }])
         },
-        [MSG_TYPE_CHAT_FAIL]: async () => {
+        [MSG_TYPE_CHAT_FAIL]: async (_: Uint8Array, id: string) => {
             setToUserOffline(true)
+            setMessages(prev => prev.map(msg => msg.id === id ? { ...msg, status: 'failed' } : msg))
         },
     }), [])
 
@@ -93,10 +98,10 @@ export function Chat({ toUserId }: { toUserId: string }) {
             text: input,
             timestamp: Date.now() / 1000,
             isMe: true,
+            status: 'pending',
         }])
 
         setInput('')
-
     }
 
     const sendTyping = () => {
@@ -160,6 +165,9 @@ export function Chat({ toUserId }: { toUserId: string }) {
                         </div>
                         <small style={{ color: '#888', fontSize: '0.7rem', marginTop: 4 }}>
                             {msg.from} • {new Date(msg.timestamp * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            {msg.isMe && msg.status === 'pending' && ' · ···'}
+                            {msg.isMe && msg.status === 'sent' && ' · ✓'}
+                            {msg.isMe && msg.status === 'failed' && <span style={{ color: 'red' }}> · ✗</span>}
                         </small>
                     </div>
                 ))}

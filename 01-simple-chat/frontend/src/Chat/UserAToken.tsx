@@ -21,7 +21,7 @@ const eventHandler = {
 // --- Config placeholder ---
 const config = new PipewaveModuleConfig(
     {
-        backendEndpoint: 'localhost:8080/websocket',
+        backendEndpoint: 'localhost:8080/pipewave',
         insecure: true,
         debugMode: true,
         getAccessToken: async () => "UserA",

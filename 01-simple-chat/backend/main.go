@@ -32,10 +32,11 @@ func main() {
 		OnCloseConnection: nil,
 	})
 
-	mux := pw.Mux()
+	// inject metrics handler
+
 	server := &http.Server{
 		Addr:    ":8080",
-		Handler: mux,
+		Handler: http.StripPrefix("/pipewave", pw.Mux()),
 	}
 
 	go func() {
