@@ -1,0 +1,27 @@
+services:
+  valkey:
+    build:
+      context: ./.docker/valkey
+      dockerfile: Dockerfile
+    ports:
+      - 29103:6379
+    command: valkey-server /usr/local/etc/valkey/valkey.conf
+    networks:
+      - pw-echo
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "29104:5432"
+    volumes:
+      - ./tmp/postgres-data:/var/lib/postgresql/data
+    networks:
+      - pw-echo
+
+networks:
+  pw-echo:
+    driver: bridge

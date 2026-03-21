@@ -1,0 +1,26 @@
+import { usePipewaveStatus } from "@pipewave/reactpkg/hooks";
+
+export function ConnectionStatusExample() {
+  const { status, isConnected, isReconnecting, isSuspended } =
+    usePipewaveStatus();
+
+  const badgeColor = isConnected
+    ? "green"
+    : isReconnecting
+      ? "orange"
+      : isSuspended
+        ? "red"
+        : "gray";
+
+  return (
+    <div>
+      <p>
+        <strong>status:</strong>{" "}
+        <span style={{ color: badgeColor, fontWeight: "bold" }}>{status}</span>
+      </p>
+      <p>isConnected: {String(isConnected)}</p>
+      <p>isReconnecting: {String(isReconnecting)}</p>
+      <p>isSuspended: {String(isSuspended)}</p>
+    </div>
+  );
+}
